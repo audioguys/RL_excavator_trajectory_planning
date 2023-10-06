@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="excavator">
+  
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/excavator</robotNamespace>
+    </plugin>
+    <mu1>0.001</mu1>
+    <mu2>0.001</mu2>
+  </gazebo>
+
+  <!--
+  <gazebo reference="link_4">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>link_4</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>link_4</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+  -->
+  
+  <gazebo reference="base_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  
+  <!--Enable the Joint Feedback-->
+  <gazebo reference="joint_4">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  
+  
+  <!--The ft_sensor plugin-->
+  <gazebo>
+    <sensor name="toruqe_sensor" type="force_torque">
+      <force_torque>
+        <always_on>True</always_on>
+        <frame>sensor</frame>
+        <measure_direction>child_to_parent</measure_direction>
+        <updateRate>80.0</updateRate>
+      </force_torque>
+      <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+        <always_on>True</always_on>
+        <updateRate>80.0</updateRate>
+        <topicName>ft_sensor_topic</topicName>
+        <jointName>joint_4</jointName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+ 
+ 
+ 
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="2.9982 -0.28856 1.0639"
+        rpy="0 0 0" />
+      <mass
+        value="906690" />
+      <inertia
+        ixx="33343000"
+        ixy="845110"
+        ixz="163810"
+        iyy="41447000"
+        iyz="272840"
+        izz="73935000" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.77647 0.75686 0.73725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="-2.0385 0.0014384 1.0099"
+        rpy="0 0 0" />
+      <mass
+        value="28859" />
+      <inertia
+        ixx="36337"
+        ixy="190.14"
+        ixz="5184.2"
+        iyy="68658"
+        iyz="59.112"
+        izz="89695" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_1"
+    type="revolute">
+    <origin
+      xyz="0 0 3.525"
+      rpy="0 0 -0.0018871" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100000000"
+      velocity="2" />
+    <dynamics
+      friction="0.0001" />
+  </joint>
+  <link
+    name="link_2">
+    <inertial>
+      <origin
+        xyz="3.2965 0.00032835 -0.26598"
+        rpy="0 0 0" />
+      <mass
+        value="5398.8" />
+      <inertia
+        ixx="4259.3"
+        ixy="-3.123"
+        ixz="5304.5"
+        iyy="17053"
+        iyz="6.7842"
+        izz="13396" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_2"
+    type="revolute">
+    <origin
+      xyz="0.38181 0 1.3928"
+      rpy="0 -0.68593 0" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.35"
+      upper="0.4"
+      effort="60000000"
+      velocity="2" />
+    <dynamics
+      friction="0.05" />
+  </joint>
+  <link
+    name="link_3">
+    <inertial>
+      <origin
+        xyz="0.83532 -0.0099936 0.26405"
+        rpy="0 0 0" />
+      <mass
+        value="1970.3" />
+      <inertia
+        ixx="374.41"
+        ixy="0.019963"
+        ixz="546.76"
+        iyy="2568"
+        iyz="-0.0034746"
+        izz="2323.6" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_3"
+    type="revolute">
+    <origin
+      xyz="6.5808 0 -2.8839"
+      rpy="-3.1416 0.75322 -3.1416" />
+    <parent
+      link="link_2" />
+    <child
+      link="link_3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="1.57"
+      effort="10000000"
+      velocity="2" />
+    <dynamics
+      friction="0.05" />
+  </joint>
+  <link
+    name="link_4">
+    <inertial>
+      <origin
+        xyz="1.1532 0.000586 0.55446"
+        rpy="0 0 0" />
+      <mass
+        value="715.04" />
+      <inertia
+        ixx="742.62"
+        ixy="-0.4123"
+        ixz="122.13"
+        iyy="663.89"
+        iyz="0.24767"
+        izz="967.01" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.64706 0.61961 0.58431 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_4"
+    type="revolute">
+    <origin
+      xyz="3.2 -0.01 -0.145"
+      rpy="0 1.4444 0" />
+    <parent
+      link="link_3" />
+    <child
+      link="link_4" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.75"
+      upper="0.3"
+      effort="10000000"
+      velocity="2" />
+    <dynamics
+      friction="0.05" />
+  </joint>
+  <link
+    name="link_5">
+    <inertial>
+      <origin
+        xyz="-0.013 0.02 -0.0005"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104" />
+      <inertia
+        ixx="1.3875E-07"
+        ixy="4.0519E-22"
+        ixz="-1.0522E-21"
+        iyy="5.8673E-08"
+        iyz="-1.8967E-22"
+        izz="1.9725E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_5"
+    type="fixed">
+    <origin
+      xyz="2.2726 0.18 -0.53092"
+      rpy="-3.1416 0.86355 0" />
+    <parent
+      link="link_4" />
+    <child
+      link="link_5" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link_6">
+    <inertial>
+      <origin
+        xyz="6.6613E-16 0.05 -0.005"
+        rpy="0 0 0" />
+      <mass
+        value="0.05" />
+      <inertia
+        ixx="4.2083E-05"
+        ixy="4.7272E-19"
+        ixz="1.3171E-19"
+        iyy="1.0833E-05"
+        iyz="1.9139E-19"
+        izz="5.2083E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://excavator_description/meshes/link_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_6"
+    type="fixed">
+    <origin
+      xyz="0.75186 0.065 1.5211"
+      rpy="0 -1.5108 3.1416" />
+    <parent
+      link="link_4" />
+    <child
+      link="link_6" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+ 
+  <transmission name="joint_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_1">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint_1_Motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <transmission name="joint_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_2">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint_2_Motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+   <transmission name="joint_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_3">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint_3_Motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <transmission name="joint_4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_4">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint_4_Motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <scene>
+  <!-- modified (shadows) to reduce computation effort, default : true -->
+    <shadows>false</shadows>
+  </scene>
+ 
+</robot>

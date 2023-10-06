@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <param name="robot_description" command="cat $(find excavator_description)/urdf/excavator.urdf"/>
+  <param name="root" value="base_link"/>
+  <rosparam file="$(find excavator_description)/config/excavator.yaml"
+            command="load"/>
+
+
+  <node name="robot_state_publisher_excavator" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+            <param name="publish_frequency" type="double" value="120.0" />
+            <param name="ignore_timestamp" type="bool" value="true" />
+            <param name="tf_prefix" type="string" value="excavator" />
+            <remap from="/joint_states" to="/excavator/joint_states" />
+        </node>
+
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="--namespace=/excavator
+                              joint_state_controller
+                              joint_1_controller
+                              joint_2_controller
+                              joint_3_controller
+                              joint_4_controller">
+  </node>
+
+  <node name="gazebo_model_odom_publish_node"
+        pkg="excavator_description"
+        type="get_gazebo_model_odometry.py" respawn="false"
+        output="screen">
+  </node>
+  
+  <node name="tf_listener_target"
+        pkg="excavator_description"
+        type="get_transform_target.py" respawn="false"
+        output="screen">
+  </node>
+  
+  <node name="tf_listener_bottom"
+  	pkg="excavator_description"
+  	type="get_transform_bottom.py" respawn="false"
+  	output="screen">
+  </node>
+  
+
+
+</launch>

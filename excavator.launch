@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <!--<node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 excavator/base_link base_footprint 40" /> -->
+    
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find excavator_description)/urdf/excavator.urdf -urdf -model excavator -x 0 -y 0 -z 0 -Y 0"
+    output="screen" />
+    
+  <!-- Set the Gazebo model path to include the directory where the ball URDF is located 
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find excavator_description)/urdf"/> -->
+
+  <!-- Add Python script to spawn balls 
+  <node name="spawn_balls_1" pkg="excavator_description" type="spawn_balls_1.py" output="screen"/>  -->
+
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+    
+    
+</launch>
